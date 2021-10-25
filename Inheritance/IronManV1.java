@@ -2,7 +2,8 @@ package Inheritance;
 
 public class IronManV1 {
 
-	int helmet = 1;
+	//These are default
+	protected int helmet = 1;
 	int legs = 2;
 	int hands = 2;
 	String arcReactor = "palladium";
@@ -16,9 +17,13 @@ public class IronManV1 {
 		// TODO Auto-generated method stub
 
 	}
+	
+	//sirf apni class
 	private void flameThrower() { //inheritance not allowed
 		// TODO Auto-generated method stub
 
 		System.out.println("Main aag barsata hun!");
 	}
+	
+	
 }

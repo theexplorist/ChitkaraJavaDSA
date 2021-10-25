@@ -1,8 +1,10 @@
 package ExceptionHandlingg;
 
+import java.util.Vector;
+
 public class Stack {
 
-	private int[] data; //
+	protected int[] data; //
 	private int tos;
 	
 	public Stack() {
@@ -65,6 +67,7 @@ public class Stack {
 	public void display() {
 		// TODO Auto-generated method stub
 
+		Vector v;
 		for(int i = tos; i >= 0; i--) {
 			System.out.print(data[i] + " ");
 		}
