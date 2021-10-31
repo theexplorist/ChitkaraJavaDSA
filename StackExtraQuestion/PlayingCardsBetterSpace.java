@@ -1,5 +1,6 @@
 package StackExtraQuestion;
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -68,8 +69,8 @@ public class PlayingCardsBetterSpace {
 			a = new Stack<>();
 		}
 
-		while (!a.isEmpty()) {
-			System.out.println(a.pop());
+		while (!a0.isEmpty()) {
+			System.out.println(a0.pop());
 		}
 
 	}
