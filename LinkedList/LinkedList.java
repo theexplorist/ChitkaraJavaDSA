@@ -231,5 +231,84 @@ public class LinkedList {
 		
 		return s;
 	}
+	
+	public int kthNodeFromLast(int k) {
+		// TODO Auto-generated method stub
+
+		Node s = head;
+		Node f = head;
+		
+		for(int i = 1; i <= k; i++) {
+			f = f.next;
+		}
+		
+		//bacha hua distance = n - k for fast
+		
+		while(f != null) {
+			s = s.next;
+			f = f.next;
+		}
+		
+		return s.val;
+	}
+	
+	public void cycleCreate() {
+		// TODO Auto-generated method stub
+
+		Node tail = head;
+		while(tail.next != null) {
+			tail = tail.next;
+		}
+		
+		tail.next = head.next;
+	}
+	public boolean cycleDetection() {
+		// TODO Auto-generated method stub
+
+		Node s = head;
+		Node f = head;
+		
+		while(f != null && f.next != null) {
+			s = s.next;
+			f = f.next.next;//f == null, f.next = npe, f.next = null, null.next = npe
+			
+			if(s == f) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public LinkedList mergeTwoSortedLL(LinkedList a, LinkedList b) throws Exception {
+		// TODO Auto-generated method stub
+
+		LinkedList c = new LinkedList();
+		
+		Node t1 = a.head;
+		Node t2 = b.head;
+		
+		while(t1 != null && t2 != null) {
+			if(t1.val < t2.val) {
+				c.addAtLast(t1.val);
+				t1 = t1.next;
+			} else {
+				c.addAtLast(t2.val);
+				t2 = t2.next;
+			}
+		}
+		
+		while(t2 != null) {
+			c.addAtLast(t2.val);
+			t2 = t2.next;
+		}
+		
+		while(t1 != null) {
+			c.addAtLast(t1.val);
+			t1 = t1.next;
+		}
+		
+		return c;
+	}
 
 }
