@@ -120,4 +120,71 @@ public class BinaryTree {
 		postOrder(root.right);
 		System.out.print(root.val + " ");
 	}
+	
+	private boolean pathSum(Node root, int targetSum, int cSum) {
+		// TODO Auto-generated method stub
+
+		if(root == null) {
+			return false;
+		}
+		
+		if(root.left == null && root.right == null) {
+			if(cSum + root.val == targetSum) {
+				return true;
+			}
+		}
+		boolean leftAns = pathSum(root.left, targetSum, cSum + root.val);
+		boolean rightAns = pathSum(root.right, targetSum, cSum + root.val);
+		return leftAns || rightAns;
+	}
+	
+	public int countNodes() {
+		// TODO Auto-generated method stub
+
+		return countNodes(root);
+	}
+	private int countNodes(Node root) {
+		// TODO Auto-generated method stub
+
+		if(root == null) {
+			return 0;
+		}
+		
+		int leftA = countNodes(root.left);
+		int rightA = countNodes(root.right);
+		
+		int total = leftA + rightA + 1;
+		return total;
+	}
+	
+	private int height(Node root) {
+		// TODO Auto-generated method stub
+
+		if(root == null) {
+			return 0;
+		}
+		int leftH = height(root.left);
+		int rightH = height(root.right);
+		
+		int totalH = Math.max(leftH + 1, rightH + 1);
+		return totalH;
+	}
+	
+	private int diameter(Node root) {
+		// TODO Auto-generated method stub
+
+		if(root == null) {
+			return 0;
+		}
+		int leftH = height(root.left);
+		int rightH = height(root.right);
+		
+		int rootDia = leftH + rightH;
+		
+		int leftDia = diameter(root.left);
+		int rightDia = diameter(root.right);
+		
+		int maxDia = Math.max(rootDia, Math.max(leftDia, rightDia));
+		return maxDia;
+	}
 }
