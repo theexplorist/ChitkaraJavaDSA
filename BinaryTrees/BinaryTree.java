@@ -1,5 +1,9 @@
 package BinaryTrees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class BinaryTree {
@@ -223,18 +227,18 @@ public class BinaryTree {
 
 	public boolean isBalanced(Node root) {
 
-		if(root == null) {
+		if (root == null) {
 			return true;
 		}
 		int leftH = height(root.left);
 		int rightH = height(root.right);
-		
+
 		boolean isRootBalanced = (Math.abs(leftH - rightH) <= 1);
 		boolean isLeftBalanced = isBalanced(root.left);
 		boolean isRighBalanced = isBalanced(root.right);
 		return isRootBalanced && isLeftBalanced && isRighBalanced;
 	}
-	
+
 	class Pair2 {
 		boolean isBal;
 		int ht;
@@ -244,25 +248,107 @@ public class BinaryTree {
 			this.ht = ht;
 		}
 	}
-	
+
 	private Pair2 isBalancedOpt(Node root) {
 		// TODO Auto-generated method stub
 
 		if (root == null) {
 			return new Pair2(true, 0);
 		}
-		
+
 		Pair2 leftPair = isBalancedOpt(root.left);
 		Pair2 rightPair = isBalancedOpt(root.right);
-		
+
 		int leftHt = leftPair.ht;
 		int rightHt = rightPair.ht;
-		
+
 		boolean apnaBalance = (Math.abs(leftHt - rightHt) <= 1);
 		int apniHt = Math.max(leftHt, rightHt) + 1;
-		
-		
+
 		boolean finalBal = apnaBalance && leftPair.isBal && rightPair.isBal;
 		return new Pair2(finalBal, apniHt);
 	}
+
+	private void lvlOrder(Node root) {
+		// TODO Auto-generated method stub
+
+		Queue<Node> q = new LinkedList<>();
+
+		q.add(root);
+		while (!q.isEmpty()) {
+			Node front = q.remove();
+			System.out.println(front.val);
+			if (front.left != null) {
+				q.add(front.left);
+			}
+
+			if (front.right != null) {
+				q.add(front.right);
+			}
+		}
+
+	}
+
+	public void lvlOrderLineWise() {
+		// TODO Auto-generated method stub
+
+		lvlOrderLineWise(root);
+	}
+	private void lvlOrderLineWise(Node root) {
+		// TODO Auto-generated method stub
+
+		List<List<Integer>> ans = new ArrayList<>();
+		Queue<Node> q = new LinkedList<>();
+
+		List<Integer> lvlList = new ArrayList<>();
+		q.add(root);
+		q.add(null);
+		while (!q.isEmpty()) {
+			Node front = q.remove();
+			if (front == null) {
+
+				if(!q.isEmpty()) {
+					
+					q.add(null);
+				}
+				
+				ans.add(lvlList);
+				lvlList = new ArrayList<>();
+			} else {
+				//System.out.print(front.val + " ");
+				lvlList.add(front.val);
+				if (front.left != null) {
+					q.add(front.left);
+				}
+
+				if (front.right != null) {
+					q.add(front.right);
+				}
+			}
+		}
+		
+		System.out.println(ans);
+	}
+	
+	int res;
+    public int sumNumbers(Node root) {
+        res = 0;
+        sumNumbers(root, 0);
+        return res;
+    }
+    
+     public void sumNumbers(Node root, int ans) {
+        
+         if(root == null) {
+             return;
+         }
+         if(root.left == null && root.right == null) {
+             ans = ans * 10 + root.val;
+             res += ans;
+             return;
+         }
+         sumNumbers(root.left, ans * 10 + root.val);
+         sumNumbers(root.right, ans * 10 + root.val);
+         
+    }
 }
