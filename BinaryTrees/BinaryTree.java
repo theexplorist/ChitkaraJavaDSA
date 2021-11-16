@@ -234,9 +234,9 @@ public class BinaryTree {
 		int rightH = height(root.right);
 
 		boolean isRootBalanced = (Math.abs(leftH - rightH) <= 1);
-		boolean isLeftBalanced = isBalanced(root.left);
-		boolean isRighBalanced = isBalanced(root.right);
-		return isRootBalanced && isLeftBalanced && isRighBalanced;
+
+		isBalanced(root.right);
+		return isRootBalanced && isBalanced(root.left) && isBalanced(root.left);
 	}
 
 	class Pair2 {
@@ -294,28 +294,31 @@ public class BinaryTree {
 
 		lvlOrderLineWise(root);
 	}
+
 	private void lvlOrderLineWise(Node root) {
 		// TODO Auto-generated method stub
 
-		List<List<Integer>> ans = new ArrayList<>();
+	    List<List<Integer>> ans = new ArrayList<>();
 		Queue<Node> q = new LinkedList<>();
 
 		List<Integer> lvlList = new ArrayList<>();
 		q.add(root);
 		q.add(null);
+
 		while (!q.isEmpty()) {
 			Node front = q.remove();
 			if (front == null) {
 
-				if(!q.isEmpty()) {
-					
+				if (!q.isEmpty()) {
+
 					q.add(null);
 				}
-				
+
 				ans.add(lvlList);
 				lvlList = new ArrayList<>();
 			} else {
-				//System.out.print(front.val + " ");
+
+				// System.out.print(front.val + " ");
 				lvlList.add(front.val);
 				if (front.left != null) {
 					q.add(front.left);
@@ -326,29 +329,90 @@ public class BinaryTree {
 				}
 			}
 		}
-		
+
 		System.out.println(ans);
 	}
-	
+
 	int res;
-    public int sumNumbers(Node root) {
-        res = 0;
-        sumNumbers(root, 0);
-        return res;
-    }
-    
-     public void sumNumbers(Node root, int ans) {
-        
-         if(root == null) {
-             return;
-         }
-         if(root.left == null && root.right == null) {
-             ans = ans * 10 + root.val;
-             res += ans;
-             return;
-         }
-         sumNumbers(root.left, ans * 10 + root.val);
-         sumNumbers(root.right, ans * 10 + root.val);
-         
-    }
+
+	public int sumNumbers(Node root) {
+		res = 0;
+		sumNumbers(root, 0);
+		return res;
+	}
+
+	public void sumNumbers(Node root, int ans) {
+
+		if (root == null) {
+			return;
+		}
+		if (root.left == null && root.right == null) {
+			ans = ans * 10 + root.val;
+			res += ans;
+			return;
+		}
+		sumNumbers(root.left, ans * 10 + root.val);
+		sumNumbers(root.right, ans * 10 + root.val);
+
+	}
+
+	private void rightSideView(Node root) {
+		// TODO Auto-generated method stub
+
+		Queue<Node> q = new LinkedList<>();
+
+		q.add(root);
+		while (!q.isEmpty()) {
+			int n = q.size();
+
+			for (int i = 1; i <= n; i++) {
+				Node front = q.remove();
+				// System.out.println(front.val);
+				if (i == n) {
+					System.out.println(front.val);
+				}
+				if (front.left != null) {
+					q.add(front.left);
+				}
+
+				if (front.right != null) {
+					q.add(front.right);
+				}
+			}
+
+		}
+	}
+
+	private void rightViewLineWise() {
+		// TODO Auto-generated method stub
+
+		Queue<Node> q = new LinkedList<>();
+
+		q.add(root);
+		q.add(null);
+
+		while (!q.isEmpty()) {
+			Node front = q.remove();
+			if (front == null) {
+
+				if (!q.isEmpty()) {
+
+					q.add(null);
+				}
+			} else {
+
+				if (q.peek() == null) {
+					System.out.print(front.val + " ");
+				}
+
+				if (front.left != null) {
+					q.add(front.left);
+				}
+
+				if (front.right != null) {
+					q.add(front.right);
+				}
+			}
+		}
+	}
 }
