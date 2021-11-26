@@ -480,4 +480,7 @@ public class BinaryTree {
 		
 		return leftAns;
 	}
+	public static void main(String[] args) {
+		
+	}
 }
